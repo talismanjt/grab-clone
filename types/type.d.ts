@@ -54,6 +54,7 @@ declare interface Ride {
 }
 
 declare interface ButtonProps extends TouchableOpacityProps {
+    onPress?: (event: GestureResponderEvent) => void;
     title: string;
     bgVariant?: "primary" | "secondary" | "danger" | "outline" | "success";
     textVariant?: "primary" | "default" | "secondary" | "danger" | "success";
@@ -80,6 +81,7 @@ declare interface GoogleInputProps {
 
 declare interface InputFieldProps extends TextInputProps {
     label: string;
+    placeholder?: string;
     icon?: any;
     secureTextEntry?: boolean;
     labelStyle?: string;
@@ -87,6 +89,9 @@ declare interface InputFieldProps extends TextInputProps {
     inputStyle?: string;
     iconStyle?: string;
     className?: string;
+    value?: string;
+    onChangeText?: (text: string) => void;
+    keyboardType?: "default" | "numeric" | "email-address" | "phone-pad";
 }
 
 declare interface PaymentProps {

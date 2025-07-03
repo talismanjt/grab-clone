@@ -34,7 +34,7 @@ const InputField = ({
             <Image source={icon} className={`w-6 h-6 ml-4 ${iconStyle}`} />
           )}
           <TextInput
-            className={`rounded-full p-4 font-JakartaSemiBold text-[15px] flex-1 ${inputStyle} placeholder-gray-700`}
+            className={`rounded-full p-3 font-JakartaSemiBold text-[15px] flex-1 ${inputStyle} placeholder-gray-700`}
             secureTextEntry={secureTextEntry}
             {...props}
           />
