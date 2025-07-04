@@ -1,5 +1,5 @@
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Image, Text, TouchableOpacity, View } from "react-native";
+import { Image, Text, TouchableOpacity, View, Button } from "react-native";
 import { router } from "expo-router";
 import Swiper from "react-native-swiper";
 import { useRef, useState } from "react";
@@ -57,6 +57,17 @@ const OnBoarding = () => {
             >
               {item.description}
             </Text>
+            {isLastSlide && (
+              <CustomButton
+                onPress={() => {
+                  router.replace("/(auth)/register");
+                }}
+                title={"Get Started"}
+                className={"mt-5 w-full shadow-none"}
+                bgVariant={"primary"}
+                textVariant={"default"}
+              />
+            )}
           </View>
         ))}
       </Swiper>

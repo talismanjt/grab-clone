@@ -22,7 +22,7 @@
     },
     "web": {
       "bundler": "metro",
-      "output": "static",
+      "output": "server",
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
@@ -46,7 +46,9 @@
       "typedRoutes": true
     },
     "extra": {
-      "router": {},
+      "router": {
+        "origin": "https://expo.dev.grabclone.com/"
+      },
       "eas": {
         "projectId": "efc89bea-2fa7-404d-b065-f0e5c1bea3f0"
       }

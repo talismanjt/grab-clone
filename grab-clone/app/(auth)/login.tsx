@@ -1,4 +1,4 @@
-import { Alert, Image, ScrollView, Text, View } from "react-native";
+import { Image, ScrollView, Text, View } from "react-native";
 import { icons, images } from "@/constants";
 import InputField from "@/components/InputField";
 import { useState } from "react";
@@ -79,6 +79,17 @@ const Login = () => {
           </Text>
         </View>
         <View className={"p-7"}>
+          {loginVerification.error && (
+            <View
+              className={
+                "bg-red-100 border border-red-400 rounded-md p-5 mt-2 mb-4"
+              }
+            >
+              <Text className={"text-red-500 text-sm text-center"}>
+                {loginVerification.error}
+              </Text>
+            </View>
+          )}
           <InputField
             label={"Email"}
             placeholder={"Enter your Email"}
@@ -94,17 +105,18 @@ const Login = () => {
             value={form.password}
             onChangeText={(value: any) => setForm({ ...form, password: value })}
           />
-          {loginVerification.error && (
-            <View className={"bg-red-100 rounded-full p-3 mt-2"}>
-              <Text className={"text-red-500 text-sm text-center"}>
-                {loginVerification.error}
-              </Text>
-            </View>
-          )}
+
           <CustomButton
             title={"Log In"}
             onPress={onLoginPress}
             className={"mt-6"}
+          />
+          <CustomButton
+            title={"Go To Home"}
+            onPress={() => {
+              router.replace("/(root)/(tabs)/home");
+            }}
+            className={"mt-5"}
           />
           <OAuth />
           <Link

@@ -27,7 +27,11 @@ const Register = () => {
   // Handle submission of sign-up form
   const onSignUpPress = async () => {
     if (!form.name || !form.email || !form.password || !form.confirmPassword) {
-      Alert.alert("Sign up failed", "Please fill out all fields");
+      setVerification({
+        ...verification,
+        state: "failed",
+        error: "Please fill out all fields",
+      });
       return;
     }
 
@@ -37,7 +41,11 @@ const Register = () => {
         state: "failed",
         error: "Passwords do not match",
       });
-      Alert.alert("Sign up failed", "Passwords do not match");
+      setVerification({
+        ...verification,
+        state: "failed",
+        error: "Passwords do not match",
+      });
       return;
     }
 
@@ -57,7 +65,11 @@ const Register = () => {
         state: "pending",
       });
     } catch (err: any) {
-      Alert.alert("Sign up failed", err.errors[0].longMessage);
+      setVerification({
+        ...verification,
+        state: "failed",
+        error: err.errors[0].longMessage,
+      });
     }
   };
 
@@ -74,7 +86,14 @@ const Register = () => {
       // If verification was completed, set the session to active
       // and redirect the user
       if (signUpAttempt.status === "complete") {
-        // TODO: Create a database user
+        await fetch("/(api)/user", {
+          method: "POST",
+          body: JSON.stringify({
+            name: form.name,
+            email: form.email,
+            clerkId: signUpAttempt.createdUserId,
+          }),
+        });
         await setActive({ session: signUpAttempt.createdSessionId });
         setVerification({ ...verification, state: "success" });
       } else {
@@ -108,7 +127,18 @@ const Register = () => {
             Create Your Account
           </Text>
         </View>
-        <View className={"p-5"}>
+        <View className={"p-7"}>
+          {verification.error && (
+            <View
+              className={
+                "bg-red-100 border border-red-400 rounded-md p-5 mt-2 mb-4"
+              }
+            >
+              <Text className={"text-red-500 text-sm text-center"}>
+                {verification.error}
+              </Text>
+            </View>
+          )}
           <InputField
             label={"Name"}
             placeholder={"Enter your name"}
