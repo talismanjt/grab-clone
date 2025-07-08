@@ -68,8 +68,8 @@ const Login = () => {
   return (
     <ScrollView className={"flex-1 bg-white"}>
       <View className={"flex-1 bg-white mb-20"}>
-        <View className={"relative w-full h-[250px]"}>
-          <Image source={images.signUpCar} className={"z-0 w-ful h-[250px]"} />
+        <View className={"relative w-full h-[150px]"}>
+          <Image source={""} className={"z-0 w-ful h-[150px]"} />
           <Text
             className={
               "text-2xl text-black font-JakartaSemiBold absolute bottom-5 left-5"
@@ -111,13 +111,7 @@ const Login = () => {
             onPress={onLoginPress}
             className={"mt-6"}
           />
-          <CustomButton
-            title={"Go To Home"}
-            onPress={() => {
-              router.replace("/(root)/(tabs)/home");
-            }}
-            className={"mt-5"}
-          />
+
           <OAuth />
           <Link
             href={"/register"}
