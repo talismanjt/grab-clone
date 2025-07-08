@@ -20,10 +20,9 @@ const GoogleTextInput = ({
       placeholder="Where to?"
       fetchDetails={true}
       debounce={200}
-      enablePoweredByContainer={true}
       minLength={2}
-      enableHighAccuracyLocation={true}
       predefinedPlaces={[]}
+      keyboardShouldPersistTaps="handled"
       styles={{
         textInputContainer: {
           alignItems: "center",
@@ -58,9 +57,6 @@ const GoogleTextInput = ({
         types: "geocode",
       }}
       onPress={(data, details = null) => {
-        console.log("Selected data:", data);
-        console.log("Details:", details);
-
         if (!details?.geometry?.location) {
           console.warn("Missing geometry details!");
           return;
