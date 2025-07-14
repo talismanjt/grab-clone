@@ -4,18 +4,23 @@ import { router } from "expo-router";
 import { icons } from "@/constants";
 import Map from "@/components/Map";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
 
 const RideLayout = ({
   children,
   title,
-  snapPoints,
+  customSnapPoints,
 }: {
   children: React.ReactNode;
   title?: string;
-  snapPoints?: string[];
+  customSnapPoints?: string[];
 }) => {
   const bottomSheetRef = useRef<BottomSheet>(null);
+  const snapPoints = useMemo(
+    () => customSnapPoints || ["50%", "85%"],
+    [customSnapPoints],
+  );
+
   return (
     <GestureHandlerRootView>
       <View className={"flex-1 bg-white"}>
@@ -44,11 +49,7 @@ const RideLayout = ({
           </View>
           <Map />
         </View>
-        <BottomSheet
-          ref={bottomSheetRef}
-          snapPoints={snapPoints || ["50%", "85%"]}
-          index={0}
-        >
+        <BottomSheet ref={bottomSheetRef} snapPoints={snapPoints} index={0}>
           <BottomSheetView style={{ flex: 1, padding: 20 }}>
             {children}
           </BottomSheetView>
