@@ -1,0 +1,33 @@
+# macOS
+.DS_Store
+*.pem
+
+# IDEs
+.idea/
+.vscode/
+
+# Dependencies (stripe-server)
+stripe-server/node_modules/
+stripe-server/package-lock.json
+
+# Environment files
+.env
+.env.local
+.env*.local
+
+# Build files
+dist/
+build/
+
+# Logs
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# System files
+Thumbs.db

@@ -7,10 +7,12 @@ import { useDriverStore, useLocationStore } from "@/store";
 import Payment from "@/components/Payment";
 
 import { StripeProvider } from "@stripe/stripe-react-native";
+import { useUser } from "@clerk/clerk-expo";
 
 const BookRide = () => {
   const { userAddress, destinationAddress } = useLocationStore();
   const { drivers, selectedDriver } = useDriverStore();
+  const { user } = useUser();
 
   const driverDetails = drivers?.filter(
     (driver) => +driver.id === selectedDriver,
@@ -89,7 +91,13 @@ const BookRide = () => {
                 {destinationAddress}
               </Text>
             </View>
-            <Payment />
+            <Payment
+              fullName={user?.firstName}
+              email={user?.primaryEmailAddress?.emailAddress}
+              amount={driverDetails?.price!}
+              driverId={driverDetails?.id!}
+              rideTime={driverDetails?.time!}
+            />
           </View>
         </>
       </RideLayout>
